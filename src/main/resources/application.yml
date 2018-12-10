@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  
+axon:
+  serializer:
+    general: jackson
+  eventhandling:
+    processors:
+      "[MyProcessor]":
+        mode: TRACKING
+        threadCount: 1
+        batchSize: 1
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update       
+    show-sql: true
+  profiles:
+    active:
+    - command
+    - query  
