@@ -8,6 +8,7 @@ import javax.persistence.TypedQuery;
 import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.AllowReplay;
 import org.axonframework.eventhandling.EventHandler;
+import org.axonframework.eventhandling.ReplayStatus;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -23,7 +24,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @RequiredArgsConstructor
 @Profile("query")
-@ProcessingGroup("MyProcessor")
+@ProcessingGroup("summaryGroup")
 public class CardSummaryProjection {
 
 	@Autowired
@@ -31,7 +32,11 @@ public class CardSummaryProjection {
 
 	@EventHandler
 	@AllowReplay(false)
-	public void on(IssuedEvt event) {
+	public void on(IssuedEvt event, ReplayStatus replayStatus) {
+		
+		if(replayStatus.isReplay())
+			return;
+		
 		log.trace("projecting {}", event);
 		/*
 		 * Update our read model by inserting the new card. This is done so that

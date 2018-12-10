@@ -6,12 +6,15 @@ axon:
     general: jackson
   eventhandling:
     processors:
-      "[MyProcessor]":
+      "[summaryGroup]":
         mode: TRACKING
         threadCount: 1
         batchSize: 1
 
 spring:
+  h2:
+    console:
+      enabled: true
   jpa:
     hibernate:
       ddl-auto: update       
