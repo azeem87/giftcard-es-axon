@@ -54,10 +54,13 @@ $ mvn -Dserver.port=8082 spring-boot:run -Pquery
 $ List all the cards ( Now you will find the updated data)
 localhost:8082/cards
 
+```
+
+## To run in Monolithic
+```
 [Note: This project can also be run as Monolithic application without Axon Server, 
 Just exclude this dependency "axon-server-connector" from "axon-spring-boot-starter"]
 
-```
 $ cd giftcard-es-axon-microservices
 $ mvn clean install
 $ mvn -Dserver.port=8080 spring-boot:run
